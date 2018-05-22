@@ -38,11 +38,45 @@ Temporal Filtering, and Thresholding.
   between the two frames.
 
   We compared this to an implementation that convolved the differential
-  matrix by a 1D gaussian filter. 
+  matrix by a 1D gaussian filter.
 
+  ![Gaussian and Thresholding](resources/gaussThreshold.png)
+
+  In this figure, we plotted the result of the the motion tracking pipeline with
+  a Gaussian differential filter without spatial smoothing. The lack of spatial
+  smoothing can be seen in the noise shown in the center of the frame.
 
 ### Thresholding
+  As shown in the figure above, there is a significant amount of noise left in the
+  derivative image. In order to capture the differential, a threshold value must
+  be set to filter out small differences from frame to frame that do
+  not represent the regions of interest.
 
-## Parameter Values
+  This was done by plotting the standard deviation of each differential frame
+  over time. By watching the video, we could roughly determine the intensity of
+  the noise over time. The threshold (with some experimentation) was then set to
+  5X the standard deviation in times of no motion. The threshold value was set to
+  `10`.
 
 ## Observations and Conclusions
+  One of the key limitations of the way we currently find the region of interest
+  is the mask captures the location of the moving component in the previous and
+  next frame, but does not capture the moving object of the current frame. When
+  the moving component moves quickly enough, the two bounding regions separate
+  and leave hole where the object (person) actually is. This is because the pixels
+  that are different between the two frames will mark the area the object
+  started and ended in each frame. As such, the differentials can be used as
+  bounding edges of the window rather than specific windows highlighting motion.
+
+  ![Disjoint Mask](resources/disjoint.png)
+
+  Another weakness of the current algorithm is that the threshold value used to
+  determine movement is fixed. This means that large changes in light will cause
+  the whole scene to render as motion since all pixels will have changed in value.
+  This can be seen in the change in light during the RedChair video.
+
+  ![Changes in light degrade performance](resources/lighChange.png)
+
+  This can be remedied by updating the threshold periodically to determine whether
+  changes in values are outside the norm of all other changes in value for the
+  particular frame, rather than compared to an absolute value. 
