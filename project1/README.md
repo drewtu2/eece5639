@@ -29,6 +29,7 @@ Temporal Filtering, and Thresholding.
 
   This comparison shows that when trying to capture motion, a the larger the blur
   present in images, the larger and clearer chunks of motion are captured.
+  The Gaussian Box filter uses an standard deviation of 2 sigma.
 
 ### Temporal Filters
   We used two different temporal filters to calculate the derivatives between
@@ -38,7 +39,7 @@ Temporal Filtering, and Thresholding.
   between the two frames.
 
   We compared this to an implementation that convolved the differential
-  matrix by a 1D gaussian filter.
+  matrix (`[-1 0 1]`) by a 1D gaussian filter (`1/16 * [1 4 6 4 1]`).
 
   ![Gaussian and Thresholding](resources/gaussThreshold.png)
 
