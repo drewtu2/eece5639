@@ -75,7 +75,7 @@ Temporal Filtering, and Thresholding.
   the whole scene to render as motion since all pixels will have changed in value.
   This can be seen in the change in light during the RedChair video.
 
-  ![Changes in light degrade performance](resources/lighChange.png)
+  ![Changes in light degrade performance](resources/lightChange.png)
 
   This can be remedied by updating the threshold periodically to determine whether
   changes in values are outside the norm of all other changes in value for the
