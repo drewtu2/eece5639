@@ -52,8 +52,9 @@ function images = genImages(numImages)
 % back along Z plane. 
     images = [];
     for i = 1:numImages
-        image = uint8(128 * ones(256, 256));
-        image = imnoise(image, 'gaussian', 0, 2^2);
+        image = double(128 * ones(256, 256));
+        noise = 2 .* randn(256); % Standard Deviation of 2
+        image = image + noise;
         images = cat(3, images, image);
     end
     
@@ -102,7 +103,7 @@ function filtered = gaussian(frame, n, sigma)
 
     % Create Gaussian Mask
     h = exp(-(X.^2 + Y.^2) / (2*sigma*sigma));
-
+    
     % Normalize so that total area (sum of all weights) is 1
     h = h / sum(h(:));
     
@@ -122,9 +123,9 @@ function filtered = gaussCube2(cube, n, sigma)
 end
 
 function filtered = gaussianSeparable(frame, k, sigma)
-    % Problem 3
-    % Creates two 1D Masks that can be convolved to produce a 2D gaussian
-    % filter
+% Problem 3
+% Creates two 1D Masks that can be convolved to produce a 2D gaussian
+% filter
     
     % Generate horizontal and vertical co-ordinates, where
     % the origin is in the middle
@@ -160,7 +161,9 @@ function noise = EST_NOISE(images)
 % and Z being imagne number n. 
     E_Images = double(sum(images, 3) / size(images, 3));
     
+    % Define a matrix the size of the image to hold the noise
     noise = double(zeros(size(images, 1), size(images,2)));
+    
     for image = 1:size(images, 3)
         this_iteration = (E_Images - double(images(:, :, image))).^2; 
         noise = noise + this_iteration;
@@ -175,7 +178,7 @@ function averagingFilters(showImage)
 % Prints the filtered results. 
 
     filterA = 1/5 * [1 1 1 1 1];
-    filterB = 1/10 * [1 2 3 2 1];
+    filterB = 1/10 * [1 2 4 2 1];
     image = [10 10 10 10 10 40 40 40 40 40];
     
     filteredUniform = conv(image, filterA, 'same');
@@ -197,6 +200,33 @@ function averagingFilters(showImage)
     display(strcat('Original image: ', mat2str(image)));
     display(strcat('Filtered Uniform : ', mat2str(filteredUniform)));
     display(strcat('Filtered Gaussian: ', mat2str(filteredGaussian)));
+    display(' ')
+    display('Computation costs are the same for the given implementation, however,')
+    display('uniform filter can be optimized by simply summing over the requested area and')
+    display('dividing by 5 instead of performing the full convolution.')
+    
+    display(' ')
+    display('Variance Comparision')
+    display('Unfiltered, Gaussian, Zero Mean with Variance sigma^2: sigma^2')
+    display(' ')
+    display('Var[aX + bY] = a^2*Var[X] + b^2*Var[Y]')
+    display(' ')
+    display('***** Uniform Filter *****');
+    display('| 1  | 1  | 1  | 1  | 1  |')
+    display('| n1 | n2 | n3 | n4 | n5 |')
+    display(' X = (n1 + n2 + n3 + n4 + n5) / 5')
+    display(' var[X] = (var[n1] + var[n2] + var[n3] + var[n4] + var[n5]) / 5^2')
+    display(' var[X] = sigma^2 + sigma^2 + sigma^2 + sigma^2 + sigma^2 / 25')
+    display(' var[X] = 5 sigma^2 / 25')
+    display('Uniform Filter: sigma^2/5')
+    display(' ')
+    display('***** Gaussian Filter *****');
+    display('| 1  | 2  | 4  | 2  | 1  |')
+    display('| n1 | n2 | n3 | n4 | n5 |')
+    display(' X = (n1 + 2*n2 + 4*n3 + 2*n4 + n5) / 10')
+    display(' var[X] = (var[n1] + 4*var[n2] + 16*var[n3] + 4*var[n4] + var[n5]) / 10^2')
+    display(' var[X] = sigma^2 + 4*sigma^2 + 16*sigma^2 + 4*sigma^2 + sigma^2 / 100')
+    display('Gaussian Filter: 26 sigma^2 / 50')
 
 end
 
@@ -204,6 +234,39 @@ function saltPepperImage()
 % Problem 5
 % Finds the PDF for the pixels surrounding a gray line on a salt and pepper
 % background. 
+%
+    display('**************************************');
+    display('Problem 5: PDF')
+    display('**************************************');
+        
+    display('Calculated PDFs... See figure for experimental results');
+    display(' | Adjacent   |     P   |   O  |');
+    display(' -------------------------------');
+    display(' | 0 0 50     |  49/100 | -50  |');
+    display(' | 0 100 50   |  21/100 |  150 |');
+    display(' | 100 0 50   |  21/100 | -150 |');
+    display(' | 100 100 50 |  09/100 | 50   |');
+    display('                                ');
+    display(' | Adjacent PDF |     P  |      ');
+    display(' -----------------------        ');
+    display(' | -50          |  49/100 |     ');
+    display(' |  50          |  09/100 |     ');
+    display(' | -150         |  21/100 |     ');
+    display(' | 150          |  21/100 |     ');
+    display('                                ');
+    display(' | On Line    |     P   |   O  |');
+    display(' -------------------------------');
+    display(' | 0 50 0     |  49/100 | 100  |');
+    display(' | 0 50 100   |  21/100 |   0  |');
+    display(' | 100 50 0   |  21/100 |   0  |');
+    display(' | 100 50 100 |  09/100 | -100 |');
+    display('                                ');
+    display(' | On Line PDF  |     P  |      ');
+    display(' -----------------------        ');
+    display(' | 100          |  49/100 |     ');
+    display(' |  0           |  42/100 |     ');
+    display(' | -100         |  9/100  |     ');
+
     PEPPER = 100;
     SALT = 0;
     GRAY = 50;
@@ -219,15 +282,20 @@ function saltPepperImage()
     end
     
     figure;
-    subplot(1, 2, 1);
+    subplot(1, 3, 1);
     imshow(image);
     filter = [-1, 2, -1];
     filterResults = imfilter(image, filter, 'same');
     resultsOfInterest = cat(1, filterResults(:, 2), filterResults(:, 4));
     
-    subplot(1, 2, 2);
+    subplot(1, 3, 2);
     pie(categorical(resultsOfInterest));
     title('Problem 5: Distribution of values surrounding vertical line');
+    
+    subplot(1, 3, 3);
+    resultsOfInterest = filterResults(:, 3);
+    pie(categorical(resultsOfInterest));
+    title('Problem 5: Distribution of values of vertical line');
 
 end
 
