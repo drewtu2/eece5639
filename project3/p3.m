@@ -1,7 +1,7 @@
 
 function p3()
 % https://www.youtube.com/watch?v=1r8E9uAcn4E
-
+THRESHOLD = 1;
 close all;
 clc;
 % To summarize the LK algorithm for computing flow:
@@ -9,26 +9,28 @@ clc;
 % frames.
 
 % Commented out for testing purposes.
-%     images = getImages();
-%     g1 = readimage(images, 1);
-%     g2 = readimage(images, 2);
-     g1 = testImage(1);
-     g2 = testImage(2);
+     images = getImages();
+     g1 = readimage(images, 1);
+     g2 = readimage(images, 2);
+%      g1 = testImage(1);
+%      g2 = testImage(2);
 
-    imageSize = size(g1);
-    windowSize = 3; % How large of a window
+    imageSize = size(g1)
+    windowSize = 5; % How large of a window
 
 % 2. Compute the spatial intensity gradients Ix and Iy of image2. 
 % Recall that it is a good idea to smooth before taking the derivative, 
 % for example by using derivative of Gaussian operators.
-    smoothG2 = imgaussfilt(g2, 2);
-    Ix = conv2(smoothG2, [-1 0 1], 'same');
-    Iy = conv2(smoothG2, [-1 0 1]', 'same');
+    %smoothG2 = imgaussfilt(g2, 2);
+    smoothG2 = g2;
+    Ix = abs(conv2(smoothG2, [-1 0 1], 'same'));
+    Iy = abs(conv2(smoothG2, [-1 0 1]', 'same'));
 
 % 3. Compute the temporal gradient It by subtracting a smoothed version of 
 % image1 from a smoothed version of image2.
     smoothG1 = imgaussfilt(g1, 2);
-    It = smoothG2 - smoothG1;
+    smoothG1 = g1;
+    It = abs(smoothG2 - smoothG1);
 
 % 4. For a given window size W , form a system of linear equations at each 
 % pixel by summing over products of gradients in its neighborhood, as 
@@ -49,30 +51,43 @@ clc;
        end
     end
     
+    % Threshold Images
+    Vx(abs(Vx) < THRESHOLD) = 0;
+    Vy(abs(Vy) < THRESHOLD) = 0;
+    
 % 6. Display the flow vectors overlaid on the image. You can use matlab 
 % ?quiver? to show the flow field.
 
     figure;
-    subplot(4, 2, 1);
-    imshow(g1);
+    subplot(5, 2, 1);
+    imshow(uint8(g1));
     title('G1')
     
-    subplot(4, 2, 2);
-    imshow(g2);
+    subplot(5, 2, 2);
+    imshow(uint8(g2));
     title('G2')
     
-    subplot(4, 2, 3)
-    imshow(Ix)
+    subplot(5, 2, 3)
+    imshow(uint8(Ix))
     title('Delta X G2')
     
-    subplot(4, 2, 4)
-    imshow(Iy)
+    subplot(5, 2, 4)
+    imshow(uint8(Iy))
     title('Delta Y G2')
     
-    subplot(4, 2, 5:8);
+    subplot(5, 2, 5)
+    imshow(uint8(smoothG2))
+    title('Smooth G2')
+    
+    subplot(5, 2, 6)
+    imshow(uint8(It))
+    title('Delta T')
+    
+    subplot(5, 2, 7:10);
     quiver(Vx, Vy);
     hax = gca; %get the axis handle
-    image([0, 16], [0, 16], g1); %plot the image within the axis limits
+    imshow(uint8(g2)); %plot the image within the axis limits
+    %imshow(double(ones(size(g2)))); %plot the image within the axis limits
     hold on;
     quiver(Vx, Vy);
 end
@@ -80,7 +95,7 @@ end
 function [X, Y] = getV(Ix, Iy, It, row, col, windowSize)
     edgeBuffer = (windowSize - 1)/2;
     
-    if row <= edgeBuffer || row >= size(Ix, 2) - edgeBuffer
+    if row <= edgeBuffer || row >= size(Ix, 1) - edgeBuffer
     	X = 0;
         Y = 0;
         return;
@@ -92,25 +107,34 @@ function [X, Y] = getV(Ix, Iy, It, row, col, windowSize)
         % Get the windows
         XWindow = Ix((row - edgeBuffer):(row + edgeBuffer), ...
                     (col - edgeBuffer):(col + edgeBuffer));
+        XWindow = reshape(XWindow, [], 1);
+        
         YWindow = Iy((row - edgeBuffer):(row + edgeBuffer), ...
                     (col - edgeBuffer):(col + edgeBuffer));
+        YWindow = reshape(YWindow, [], 1);
+        
         TWindow = It((row - edgeBuffer):(row + edgeBuffer), ...
                     (col - edgeBuffer):(col + edgeBuffer));
         
-        % Calculate Corner Matrix        
-        X2 = sum(sum(XWindow.^2));
-        Y2 = sum(sum(YWindow.^2));
-        XY = sum(sum(XWindow.*YWindow));
-        CornerMatrix = [X2 XY; XY Y2];
+        % Calculate b and A
+        b = -1 * reshape(TWindow, [], 1);
+        A = cat(2, XWindow, YWindow);
+        ATA = A' * A;
         
-        % Calculate Transform Matrix
-        Tx = sum(sum(XWindow.*TWindow));
-        Ty = sum(sum(YWindow.*TWindow));
-        TransformMatrix = -1 * [Tx; Ty];
+        % Calculate v if the ATA is invertable. 
+        if(det(ATA) ~= 0)    
+            % If it is, return the velocities. 
+            % v = (A^T*A)^-1 * A^T * b
+            v = ATA \  A' * b;
+
+            X = v(1);
+            Y = v(2);
+        else
+            % Otherwise, return 0 for velocities
+            X = 0;
+            Y = 0; 
+        end
         
-        VxVy = CornerMatrix \ TransformMatrix;
-        X = VxVy(1);
-        Y = VxVy(2);
     end
 end
 
@@ -139,11 +163,12 @@ end
 
 function ret = testImage(imageNum)
 % Return test images for algorithm development. 
-    a = zeros(16, 16);
-    a(1:3, 1:3) = 256;
+    imSize = 256
+    a = zeros(imSize, imSize);
+    %a(1:3, 1:3) = 256;
     a(13:16, 1:3) = 256;
 
-    b = zeros(16, 16);
+    b = zeros(imSize, imSize);
     b(4:7, 4:7) = 256;
     
     if(imageNum == 1)
