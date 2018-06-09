@@ -1,20 +1,62 @@
 
 function p3()
 % https://www.youtube.com/watch?v=1r8E9uAcn4E
-THRESHOLD = 1;
-close all;
-clc;
-% To summarize the LK algorithm for computing flow:
+    THRESHOLD = 1;
+    close all;
+    clc;
+
+    % Commented out for testing purposes.
+    images = getImages();
+    g1 = readimage(images, 1);
+    g2 = readimage(images, 2);
+    pyramid = buildGaussPyramid(g1, g2, 2);
+
+    % Optical flow on top of pyramid first
+    [pyramid(2).Vx, pyramid(2).Vy] = opticalFlow(pyramid(2).gray1, pyramid(2).gray2);
+    
+    ofScaledUp.X = pyramid(2).Vx * 2;
+    ofScaledUp.Y = pyramid(2).Vy * 2;
+    
+%     [Vx, Vy] = opticalFlow(pyramid(1).gray1, pyramid(1).gray2);
+%     [Vx, Vy] = opticalFlow(smoothG1, smoothG2);
+
+end
+
+function pyramid = buildGaussPyramid(gIm1, gIm2, sigma)
+% Builds a 2 level gaussian pyramid of the two given images. 
+% Pyramid of form 
+%   Pyramid(n).gray1
+%   Pyramid(n).gray2
+%   Pyramid(n).gray1blur
+%   Pyramid(n).gray2blur
+% Image at level 1 (n = 1) is the largest image.
+% Image at level n is size(Image at level 1)/(2^(n-1))
+
+    pyramid(1).gray1 = gIm1;
+    pyramid(1).gray2 = gIm2;
+    pyramid(1).gray1blur = imgaussfilt(pyramid(1).gray1, sigma);
+    pyramid(1).gray2blur = imgaussfilt(pyramid(1).gray2, sigma);
+    
+    pyramid(2).gray1 = subsample(pyramid(1).gray1blur, 2);
+    pyramid(2).gray2 = subsample(pyramid(1).gray2blur, 2);
+    pyramid(2).gray1blur = imgaussfilt(pyramid(2).gray1, sigma);
+    pyramid(2).gray2blur = imgaussfilt(pyramid(2).gray2, sigma);
+    
+end
+
+function subsampled = subsample(im, num)
+% Takes an MxN matrix representing a grayscale image. 
+% Returns an image with every num'th row and col. 
+
+subsampled = im(1:num:end, 1:num:end);
+end
+
+function [Vx Vy] = opticalFlow(g1, g2)
+% Implements the LK algorithm for dense optical flow on two given images. Returns
+% Vx and Vy for every pixel. 
+
 % 1. Read image1 and image2, and convert to double flow greyscale image 
 % frames.
-
-% Commented out for testing purposes.
-     images = getImages();
-     g1 = readimage(images, 1);
-     g2 = readimage(images, 2);
-%      g1 = testImage(1);
-%      g2 = testImage(2);
-
     imageSize = size(g1)
     windowSize = 5; % How large of a window
 
@@ -38,8 +80,7 @@ clc;
 % have a set of equations:
 % [Vx; Vy] = -[Sum IxIt; Sum IyIt]/[Sum Ix^2 Sum IxIy; Sum IxIy SumIy^2]
     Vx = zeros(imageSize);
-    Vy = zeros(imageSize);
-    
+    Vy = zeros(imageSize);    
     
 % 5. Solve for the flow vector [u, v] at each pixel. It is convenient to
 % represent this vector field by two images, one containing the u 
@@ -50,10 +91,6 @@ clc;
            [Vx(row, col), Vy(row, col)] = getV(Ix, Iy, It, row, col, windowSize);
        end
     end
-    
-    % Threshold Images
-    Vx(abs(Vx) < THRESHOLD) = 0;
-    Vy(abs(Vy) < THRESHOLD) = 0;
     
 % 6. Display the flow vectors overlaid on the image. You can use matlab 
 % ?quiver? to show the flow field.
@@ -87,7 +124,7 @@ clc;
     quiver(Vx, Vy);
     hax = gca; %get the axis handle
     imshow(uint8(g2)); %plot the image within the axis limits
-    %imshow(double(ones(size(g2)))); %plot the image within the axis limits
+%     imshow(double(ones(size(g2)))); %plot the image within the axis limits
     hold on;
     quiver(Vx, Vy);
 end
@@ -163,13 +200,16 @@ end
 
 function ret = testImage(imageNum)
 % Return test images for algorithm development. 
-    imSize = 256
-    a = zeros(imSize, imSize);
+    imSize = 16;
+    WHITE = 0;
+    BLACK = 256;
+    
+    a = ones(imSize, imSize) * WHITE;
     %a(1:3, 1:3) = 256;
-    a(13:16, 1:3) = 256;
+    a(13:16, 1:3) = BLACK;
 
-    b = zeros(imSize, imSize);
-    b(4:7, 4:7) = 256;
+    b = ones(imSize, imSize) * WHITE;
+    b(4:7, 4:7) = BLACK;
     
     if(imageNum == 1)
         ret = a;
