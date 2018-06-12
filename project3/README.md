@@ -10,7 +10,7 @@ scale flows.
 
 The basic overview for dense optical flow is shown in the figure below. 
 
-![Lucas Kanade Dense Optical Flow](resources/LucasKanade.png)
+![Lucas Kanade Dense Optical Flow](resources/LucasKanadeFlow.png)
 
 The algorithm starts by converting both images to gray scale. From the gray scale
 images, we then computed the spatial intensity gradients Ix and Iy of image2. 
