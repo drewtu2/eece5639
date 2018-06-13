@@ -70,7 +70,7 @@ surface makes it easy to match points between pictures and the small flow ensure
 that the velocity can be correctly captured. The magnitude of the velocity was
 in the 1-2 pixel range - roughly the same as our ground truth. 
 
-![Ground Truth 256x256](resources/goodTest/2Pixel256.jpg)
+![Ground Truth 256x256](resources/goodTest/2pixel256.jpg)
 
 ### Bad Results
 
