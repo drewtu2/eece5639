@@ -88,4 +88,7 @@ the canvas towards the center of the image. This agrees with what we know to be
 true: the square in the image moves from the top left, towards the center of the 
 image. 
 
+The following is a result of running the algorithm on the Garden test images. 
+![Garden Results](resources/garden.jpg)
+
 ## Conclusion
