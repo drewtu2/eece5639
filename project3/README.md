@@ -72,8 +72,9 @@ in the 1-2 pixel range - roughly the same as our ground truth.
 
 ![Ground Truth 256x256](resources/goodTest/2pixel256.jpg)
 
-The following is a result of running the algorithm on the Garden test images. 
+The following is a result of running the algorithm on the some test images. 
 ![Garden Results](resources/garden.jpg)
+![Walking Results](resources/walking.jpg)
 
 ### Bad Results
 

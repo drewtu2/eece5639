@@ -6,14 +6,15 @@ function p3()
     clc;
     
     myFolder = '/Users/Andrew/Dropbox/Northeastern/2018Summer1/eece5639/project3/images/garden/'
-    isRGB = false;
+    myFolder = '/Users/Andrew/Dropbox/Northeastern/2018Summer1/eece5639/project3/images/walking/'
+    isRGB = true;
 
     % Commented out for testing purposes.
-%     images = getImages(myFolder, isRGB);
-%     g1 = readimage(images, 1);
-%     g2 = readimage(images, 2);
-    g1 = testImage(0);
-    g2 = testImage(1);
+    images = getImages(myFolder, isRGB);
+    g1 = readimage(images, 1);
+    g2 = readimage(images, 2);
+%     g1 = testImage(0);
+%     g2 = testImage(1);
     pyramid = buildGaussPyramid(g1, g2, 2);
 
     % Optical flow on top of pyramid first
