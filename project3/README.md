@@ -64,8 +64,24 @@ shows the result of the top layer of the pyramid.
 - Sigma (Gaussian blur for pyramid): 1 
 - No other spatial or temporal smothing was used
 
-![Ground Truth Full Size](resources/TruthTest2.jpg)
-![Ground Truth Quarter Size](resources/TruthTest.jpg)
+## Good Results
+In this example, there is a 2 pixel flow of a textured surface. The textured 
+surface makes it easy to match points between pictures and the small flow ensures
+that the velocity can be correctly captured. The magnitude of the velocity was
+in the 1-2 pixel range - roughly the same as our ground truth. 
+
+![Ground Truth 256x256](resources/goodTest/2Pixel256.jpg)
+
+### Bad Results
+
+![Bad Truth 256x256](resources/badTest/TruthTest2.jpg)
+![Bad Truth 128x128](resources/badTest/TruthTest.jpg)
+
+In this example, there is a 32 pixel flow of a homogoenous surface in the two 
+images. This results in 2 major issues.
+1. Large Optical Flow: The flow is too large to capture properly
+2. Not enough texture: The homogenous regions make it difficult to correctly match
+which point is moving in what direction. 
 
 An interesting point to note is that in the full image, optical flow is only found
 at the four corners of the box - at all other pixels on the map, the resulting 
@@ -81,12 +97,14 @@ information
 The resulting flows are combined by taking the maximum of of the flows from each 
 image. The final results are shown below. 
 
-![Ground Truth Combined](resources/TruthTestFinal.jpg)
+![Bad Truth Combined](resources/badTest/TruthTestFinal.jpg)
 
 The arrows show there is a net movement of the box from the top left corner of 
 the canvas towards the center of the image. This agrees with what we know to be
 true: the square in the image moves from the top left, towards the center of the 
-image. 
+image. However, we cannot detect the flow throughout the rest of the image. In 
+addition, the velocity in the X and Y directions were calculated to be less than 
+1 - drastically off from the known truth of 32 pixels. 
 
 The following is a result of running the algorithm on the Garden test images. 
 ![Garden Results](resources/garden.jpg)

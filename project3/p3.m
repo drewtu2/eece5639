@@ -247,15 +247,20 @@ end
 function ret = testImage(imageNum)
 % Return test images for algorithm development. 
     imSize = 256;
-    WHITE = 0;
-    BLACK = 256;
+    WHITE = 255;
+    BLACK = 0;
+    blockSize = 32;
     
-    a = ones(imSize, imSize) * WHITE;
+    noise = 128 * randn(blockSize); 
+    
+    size(noise)
+    
+    a = ones(imSize, imSize) * BLACK;
     %a(1:3, 1:3) = 256;
-    a(32:64, 32:64) = BLACK;
+    a(32:63, 32:63) = (ones(blockSize) * 128) + noise ;
 
-    b = ones(imSize, imSize) * WHITE;
-    b(64:96, 64:96) = BLACK;
+    b = ones(imSize, imSize) * BLACK;
+    b(37:68, 37:68) = (ones(blockSize) * 128) + noise ;
     
     if(imageNum == 1)
         ret = a;
