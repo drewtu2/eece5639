@@ -4,11 +4,16 @@ function p3()
     THRESHOLD = 1;
     close all;
     clc;
+    
+    myFolder = '/Users/Andrew/Dropbox/Northeastern/2018Summer1/eece5639/project3/images/garden/'
+    isRGB = false;
 
     % Commented out for testing purposes.
-    images = getImages();
-    g1 = readimage(images, 1);
-    g2 = readimage(images, 2);
+%     images = getImages(myFolder, isRGB);
+%     g1 = readimage(images, 1);
+%     g2 = readimage(images, 2);
+    g1 = testImage(0);
+    g2 = testImage(1);
     pyramid = buildGaussPyramid(g1, g2, 2);
 
     % Optical flow on top of pyramid first
@@ -17,9 +22,30 @@ function p3()
     ofScaledUp.X = pyramid(2).Vx * 2;
     ofScaledUp.Y = pyramid(2).Vy * 2;
     
-%     [Vx, Vy] = opticalFlow(pyramid(1).gray1, pyramid(1).gray2);
-%     [Vx, Vy] = opticalFlow(smoothG1, smoothG2);
+    ofScaledUp.X = duplicationInterpolation(ofScaledUp.X);
+    ofScaledUp.Y = duplicationInterpolation(ofScaledUp.Y);
+    
+    [pyramid(1).Vx, pyramid(1).Vy] = opticalFlow(pyramid(1).gray1, pyramid(1).gray2);
 
+    mergedOF.X = max(ofScaledUp.X, pyramid(1).Vx);
+    mergedOF.Y = max(ofScaledUp.Y, pyramid(1).Vy);
+    
+    % Plot the final Result
+    figure;
+    
+    subplot(2, 1, 1);
+    quiver(mergedOF.X, mergedOF.Y);
+    hax = gca; %get the axis handle
+    imshow(uint8(pyramid(1).gray2)); %plot the image within the axis limits
+    hold on;
+    quiver(mergedOF.X, mergedOF.Y);
+    
+    subplot(2, 1, 2);
+    imshow(double(ones(size(g2)))); %plot the image within the axis limits
+    hold on;
+    quiver(mergedOF.X, mergedOF.Y);
+    
+    
 end
 
 function pyramid = buildGaussPyramid(gIm1, gIm2, sigma)
@@ -42,6 +68,18 @@ function pyramid = buildGaussPyramid(gIm1, gIm2, sigma)
     pyramid(2).gray1blur = imgaussfilt(pyramid(2).gray1, sigma);
     pyramid(2).gray2blur = imgaussfilt(pyramid(2).gray2, sigma);
     
+end
+
+function larger = duplicationInterpolation(inputImage)
+% Returns the given image with double the width and height. Values are
+% copied to double the size
+
+    larger = zeros(2 * size(inputImage));
+    
+    larger(1:2:end, 1:2:end) = inputImage;
+    larger(2:2:end, :) = larger(1:2:end, :);
+    larger(:, 2:2:end) = larger(:, 1:2:end);
+
 end
 
 function subsampled = subsample(im, num)
@@ -70,7 +108,7 @@ function [Vx Vy] = opticalFlow(g1, g2)
 
 % 3. Compute the temporal gradient It by subtracting a smoothed version of 
 % image1 from a smoothed version of image2.
-    smoothG1 = imgaussfilt(g1, 2);
+    %smoothG1 = imgaussfilt(g1, 2);
     smoothG1 = g1;
     It = abs(smoothG2 - smoothG1);
 
@@ -132,6 +170,7 @@ end
 function [X, Y] = getV(Ix, Iy, It, row, col, windowSize)
     edgeBuffer = (windowSize - 1)/2;
     
+    % Just ignore the edges for now...
     if row <= edgeBuffer || row >= size(Ix, 1) - edgeBuffer
     	X = 0;
         Y = 0;
@@ -154,7 +193,7 @@ function [X, Y] = getV(Ix, Iy, It, row, col, windowSize)
                     (col - edgeBuffer):(col + edgeBuffer));
         
         % Calculate b and A
-        b = -1 * reshape(TWindow, [], 1);
+        b = 1 * reshape(TWindow, [], 1);
         A = cat(2, XWindow, YWindow);
         ATA = A' * A;
         
@@ -175,9 +214,9 @@ function [X, Y] = getV(Ix, Iy, It, row, col, windowSize)
     end
 end
 
-function images = getImages()
+function images = getImages(myFolder, isRGB)
     % Specify the folder where the files live.
-    myFolder = '/Users/Andrew/Dropbox/Northeastern/2018Summer1/eece5639/project3/images/'
+    
     % Check to make sure that folder actually exists.  Warn user if it doesn't.
     if ~isdir(myFolder)
       errorMessage = sprintf('Error: The following folder does not exist:\n%s', myFolder);
@@ -188,28 +227,35 @@ function images = getImages()
     % Get a list of all files in the folder with the desired file name pattern.
     % filePattern = fullfile(myFolder, '*.jpg'); % Change to whatever pattern you need.
     % theFiles = dir(filePattern);
-
     images = imageDatastore(myFolder);
-    %scale = [8 8 1];
-    scale = [1 1 1];
-    inputSize = size(readimage(images, 1))./scale;
-    
-    images.ReadFcn = @(images)double(rgb2gray(imresize(imread(images), inputSize(1:2))));
+    if isRGB
+        
+        %scale = [8 8 1];
+        scale = [1 1 1];
+        inputSize = size(readimage(images, 1))./scale;
+
+        images.ReadFcn = @(images)double(rgb2gray(imresize(imread(images), inputSize(1:2))));
+    else
+        scale = [1 1];
+        inputSize = size(readimage(images, 1))./scale;
+
+        images.ReadFcn = @(images)double(imresize(imread(images), inputSize(1:2)));
+    end
 end
 
 
 function ret = testImage(imageNum)
 % Return test images for algorithm development. 
-    imSize = 16;
+    imSize = 256;
     WHITE = 0;
     BLACK = 256;
     
     a = ones(imSize, imSize) * WHITE;
     %a(1:3, 1:3) = 256;
-    a(13:16, 1:3) = BLACK;
+    a(32:64, 32:64) = BLACK;
 
     b = ones(imSize, imSize) * WHITE;
-    b(4:7, 4:7) = BLACK;
+    b(64:96, 64:96) = BLACK;
     
     if(imageNum == 1)
         ret = a;
