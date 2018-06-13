@@ -44,6 +44,14 @@ a Gaussian Pyramid is shown in the following figure.
 
 ![Building a Gaussian Pyramid](resources/BuildingPyramid.png)
 
+Once OF is found at the top of the pyramid, results can be propagated down 
+through interpolation. In the interpolation, each pixel value at location `(i, j)`
+is copied into a matrix of twice the width and height at location `(2i, 2j)`. 
+The empty gaps in the new matrix can be filled using either replication, a 
+linear interpolation, or a Gaussian interpolation. 
+
+![Scaling OF](resources/ScalingPyramid.png)
+
 ## Experiments
 
 The best way to sanity check the results of our algorithm was to run the OF 
