@@ -45,4 +45,39 @@ a Gaussian Pyramid is shown in the following figure.
 ![Building a Gaussian Pyramid](resources/BuildingPyramid.png)
 
 ## Experiments
+
+The best way to sanity check the results of our algorithm was to run the OF 
+algorithm on a simple, computer generated image sequence. The following figures 
+show the Optical Flow computed on images of a moving square. The second image 
+shows the result of the top layer of the pyramid. 
+
+### Parameters
+- Window Size for OF: 5x5
+- Sigma (Gaussian blur for pyramid): 1 
+- No other spatial or temporal smothing was used
+
+![Ground Truth Full Size](resources/TruthTest2.jpg)
+![Ground Truth Quarter Size](resources/TruthTest.jpg)
+
+An interesting point to note is that in the full image, optical flow is only found
+at the four corners of the box - at all other pixels on the map, the resulting 
+flow was zero. This is because at all of the other pixels, there was not a strong
+enough gradient to characterize/detect movement (there was no filtering used in 
+this image). 
+
+However, when the image is shrunk to quarter size (using a Gaussian Blur and 
+subsamling), more optical flow can be detected since there are more prominent 
+gradients to be found. 
+information 
+
+The resulting flows are combined by taking the maximum of of the flows from each 
+image. The final results are shown below. 
+
+![Ground Truth Combined](resources/TruthTestFinal.jpg)
+
+The arrows show there is a net movement of the box from the top left corner of 
+the canvas towards the center of the image. This agrees with what we know to be
+true: the square in the image moves from the top left, towards the center of the 
+image. 
+
 ## Conclusion
