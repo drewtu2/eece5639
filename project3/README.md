@@ -64,13 +64,16 @@ shows the result of the top layer of the pyramid.
 - Sigma (Gaussian blur for pyramid): 1 
 - No other spatial or temporal smothing was used
 
-## Good Results
+### Good Results
 In this example, there is a 2 pixel flow of a textured surface. The textured 
 surface makes it easy to match points between pictures and the small flow ensures
 that the velocity can be correctly captured. The magnitude of the velocity was
 in the 1-2 pixel range - roughly the same as our ground truth. 
 
 ![Ground Truth 256x256](resources/goodTest/2pixel256.jpg)
+
+The following is a result of running the algorithm on the Garden test images. 
+![Garden Results](resources/garden.jpg)
 
 ### Bad Results
 
@@ -106,7 +109,3 @@ image. However, we cannot detect the flow throughout the rest of the image. In
 addition, the velocity in the X and Y directions were calculated to be less than 
 1 - drastically off from the known truth of 32 pixels. 
 
-The following is a result of running the algorithm on the Garden test images. 
-![Garden Results](resources/garden.jpg)
-
-## Conclusion
