@@ -6,6 +6,9 @@
 %  João F. Henriques, 2012
 %  http://www.isr.uc.pt/~henriques/
 
+close all;
+clear all;
+clc;
 
 %choose the path to the videos (you'll be able to choose one with the GUI)
 base_path = './data/';
@@ -17,8 +20,8 @@ output_sigma_factor = 1/16;		%spatial bandwidth (proportional to target)
 sigma = 0.2;					%gaussian kernel bandwidth
 lambda = 1e-2;					%regularization
 interp_factor = 0.075;			%linear interpolation factor for adaptation
-
-
+psrThresh = 10;                 %occlusion detection threshold
+outfile = fopen('output.txt', 'wt');  %output file
 
 %notation: variables ending with f are in the frequency domain.
 
@@ -27,7 +30,7 @@ video_path = choose_video(base_path);
 if isempty(video_path), return, end  %user cancelled
 [img_files, pos, target_sz, resize_image, ground_truth, video_path] = ...
 	load_video_info(video_path);
-
+% pos starts off with the true location
 
 %window size, taking padding into account
 sz = floor(target_sz * (1 + padding));
@@ -44,29 +47,41 @@ cos_window = hann(sz(1)) * hann(sz(2))';
 
 time = 0;  %to calculate FPS
 positions = zeros(numel(img_files), 2);  %to calculate precision
+psrs = zeros(numel(img_files), 1);  % Peak to Side Lobe Ratios (PSRs)
+psrs_delta = zeros(numel(img_files), 1);  % Peak to Side Lobe Ratios (PSRs)
 
-for frame = 1:numel(img_files),
+for frame = 1:numel(img_files) % For every frame...
 	%load image
 	im = imread([video_path img_files{frame}]);
-	if size(im,3) > 1,
+	if size(im,3) > 1
 		im = rgb2gray(im);
 	end
-	if resize_image,
+	if resize_image
 		im = imresize(im, 0.5);
-	end
-	
-	tic()
+    end
+    
+	occlusion = false;
+	tic() % Begin Timing Processing
 	
 	%extract and pre-process subwindow
 	x = get_subwindow(im, pos, sz, cos_window);
 	
-	if frame > 1,
+	if frame > 1
 		%calculate response of the classifier at all locations
 		k = dense_gauss_kernel(sigma, x, z);
 		response = real(ifft2(alphaf .* fft2(k)));   %(Eq. 9)
-		
-		%target location is at the maximum response
+		figure(2);
+        mesh(response);
+        %target location is at the maximum response
 		[row, col] = find(response == max(response(:)), 1);
+        
+        % For occlusion detection
+        [lobeSigma, lobeMean] = sideLobeInfo(response, row, col);
+        psrs(frame) = (max(response(:)) - lobeMean)/lobeSigma;
+        psrs_delta(frame) = abs((psrs(frame) - psrs(frame - 1))/psrs(frame - 1)) * 100;
+        
+        occlusion = psrs(frame) < psrThresh;
+        
 		pos = pos - floor(sz/2) + [row, col];
 	end
 	
@@ -78,30 +93,68 @@ for frame = 1:numel(img_files),
 	new_alphaf = yf ./ (fft2(k) + lambda);   %(Eq. 7)
 	new_z = x;
 	
-	if frame == 1,  %first frame, train with a single image
+	if frame == 1  %first frame, train with a single image
 		alphaf = new_alphaf;
 		z = x;
+    elseif occlusion
+        % Don't train on this frame... occlusion detected.
 	else
 		%subsequent frames, interpolate model
 		alphaf = (1 - interp_factor) * alphaf + interp_factor * new_alphaf;
 		z = (1 - interp_factor) * z + interp_factor * new_z;
-	end
+    end
 	
+    % Position estimation.
+    if frame > 3
+        [estRow, estCol] = estimatePosConstantA(positions(1: frame - 1, :), 1);
+    else
+        estRow = pos(1, 1);
+        estCol = pos(1, 2);
+    end
+    
 	%save position and calculate FPS
 	positions(frame,:) = pos;
 	time = time + toc();
 	
 	%visualization
-	rect_position = [pos([2,1]) - target_sz([2,1])/2, target_sz([2,1])];
-	if frame == 1,  %first frame, create GUI
+    rect_position = [pos([2,1]) - target_sz([2,1])/2, target_sz([2,1])];
+    
+    if occlusion % Add Occlusion Text if necessary
+        position = [0 0; 0 20];
+        box_color = {'green', 'red'};
+        text_str = {['PSR: ' num2str(psrs(frame),'%0.2f')];
+                    ['Occlusion Detected']};
+        fprintf(outfile, 'Occlusion Detected\n');
+    else
+        position = [0 0;];
+        box_color = {'green'};
+        text_str = {['PSR: ' num2str(psrs(frame),'%0.2f')]};
+        fprintf(outfile, '%d %d %d %d\n', rect_position);
+    end
+    
+	if frame == 1  %first frame, create GUI
 		%figure('Number','off', 'Name',['Tracker - ' video_path])
         figure('Name',['Tracker - ' video_path])
+        
+        % Add text overlay to the image
+        im = insertText(im, position, text_str,'FontSize',12,'BoxColor',...
+    box_color,'BoxOpacity',0.4,'TextColor','white');
+
 		im_handle = imshow(im, 'Border','tight', 'InitialMag',200);
 		rect_handle = rectangle('Position',rect_position, 'EdgeColor','g');
+        
+        hold on
+        measuredLine = animatedline(pos(1, 2), pos(1, 1), 1, 'Color', 'g', 'Linewidth', 3);
+        estimatedLine = animatedline(estCol, estRow, 50, 'Color', 'r', 'Linewidth', 3);
+        
 	else
 		try  %subsequent frames, update GUI
+            im = insertText(im, position, text_str,'FontSize',12,'BoxColor',...
+    box_color,'BoxOpacity',0.4,'TextColor','white');
 			set(im_handle, 'CData', im)
 			set(rect_handle, 'Position', rect_position)
+            addpoints(measuredLine, pos(1, 2), pos(1, 1), 1);
+            addpoints(estimatedLine, estCol, estRow, 50);
 		catch  %#ok, user has closed the window
 			return
 		end
@@ -117,4 +170,14 @@ disp(['Frames-per-second: ' num2str(numel(img_files) / time)])
 
 %show the precisions plot
 show_precision(positions, ground_truth, video_path)
+
+%show the PSRs over time
+figure;
+hold on;
+plot(psrs);
+plot([1:length(psrs)], ones(length(psrs)) * psrThresh, 'r');
+title('PSRS');
+xlabel('Frame Number'); ylabel('PSR Value');
+
+fclose(outfile);
 
