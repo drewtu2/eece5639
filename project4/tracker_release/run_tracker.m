@@ -22,8 +22,10 @@ interp_factor = 0.075;			%linear interpolation factor for adaptation
 psrThresh = 45;                 %occlusion detection threshold
 
 % outfiles 
-outfile = fopen('output.txt', 'wt');  %output text file
-animation_out = './trackerAnimation.gif'; %output gif
+generateOutputFiles = false;            % Write graphs to Gifs and output dump?
+if generateOutputFiles
+    outfile = fopen('output.txt', 'wt');  %output text file
+end
 
 %notation: variables ending with f are in the frequency domain.
 
@@ -126,12 +128,17 @@ for frame = 1:numel(img_files) % For every frame...
         box_color = {'green', 'red'};
         text_str = {['PSR: ' num2str(psrs(frame),'%0.2f')];
                     ['Occlusion Detected']};
-        fprintf(outfile, 'Occlusion Detected\n');
+        if generateOutputFiles
+            fprintf(outfile, 'Occlusion Detected\n'); 
+        end
+        
     else
         position = [0 0;];
         box_color = {'green'};
         text_str = {['PSR: ' num2str(psrs(frame),'%0.2f')]};
-        fprintf(outfile, '%d %d %d %d\n', rect_position);
+        if generateOutputFiles
+            fprintf(outfile, '%d %d %d %d\n', rect_position);
+        end
     end
     
     axis tight manual
@@ -182,10 +189,12 @@ for frame = 1:numel(img_files) % For every frame...
 % 	pause(0.05)  %uncomment to run slower
 end
 
-% Dump to gif file
-dumpFigToGif(gif_frames(15:70), '../resources/surferTracker.gif');
-dumpFigToGif(gif_frames(70:150), '../resources/surferLost.gif');
-
+% Dump to gif file - Commented out to prevent generating gifs on every run
+if generateOutputFiles
+    dumpFigToGif(gif_frames(15:70), '../resources/surferTracker.gif');
+    dumpFigToGif(gif_frames(70:150), '../resources/surferLost.gif');
+    fclose(outfile);
+end
 
 if resize_image, positions = positions * 2; end
 
@@ -201,6 +210,4 @@ plot(psrs);
 plot([1:length(psrs)], ones(length(psrs)) * psrThresh, 'r');
 title('PSRS');
 xlabel('Frame Number'); ylabel('PSR Value');
-
-fclose(outfile);
 

@@ -93,3 +93,15 @@ While this will work for simple cases where constant acceleration IS the correct
 model to use, it will fail if the true model is more complex, for example, the
 a video of a bouncing ball being occluded behind a garbage can. In these more
 complex examples, the Henkel matrix can be used to capture the higher order movement.
+
+# Running the tracker
+See the [readme.txt][tracker_release/readme.txt] in the tracker_release folder
+for instructions on running the tracker and proper data formats.
+
+Gif and Output file generation has been commented out.
+
+## Acknowledgements
+Original CMT Tracker from the following paper
+Jo�o F. Henriques, Rui Caseiro, Pedro Martins, and Jorge Batista,
+"Exploiting the Circulant Structure of Tracking-by-detection with Kernels,"
+ECCV, 2012.
