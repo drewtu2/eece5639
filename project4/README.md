@@ -101,7 +101,8 @@ for instructions on running the tracker and proper data formats.
 Gif and Output file generation has been commented out.
 
 ## Acknowledgements
-Original CMT Tracker from the following paper
+Original CMT Tracker from the following paper:
+
 Jo�o F. Henriques, Rui Caseiro, Pedro Martins, and Jorge Batista,
 "Exploiting the Circulant Structure of Tracking-by-detection with Kernels,"
 ECCV, 2012.
