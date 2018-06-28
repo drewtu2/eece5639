@@ -82,7 +82,7 @@ for frame = 1:numel(img_files) % For every frame...
         psrs(frame) = (max(response(:)) - lobeMean)/lobeSigma;
         psrs_delta(frame) = abs((psrs(frame) - psrs(frame - 1))/psrs(frame - 1)) * 100;
         
-        occlusion = psrs(frame) < psrThresh;
+        %occlusion = psrs(frame) < psrThresh;
         
 		pos = pos - floor(sz/2) + [row, col];
 	end
@@ -183,8 +183,8 @@ for frame = 1:numel(img_files) % For every frame...
 end
 
 % Dump to gif file
-dumpFigToGif(gif_frames(15:70), 'movingBookOcclusionDetection.gif');
-dumpFigToGif(gif_frames(70:150), 'absorbingBookOcclusionDetection.gif');
+dumpFigToGif(gif_frames(15:70), '../resources/surferTracker.gif');
+dumpFigToGif(gif_frames(70:150), '../resources/surferLost.gif');
 
 
 if resize_image, positions = positions * 2; end

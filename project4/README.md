@@ -37,8 +37,43 @@ When the occlusion is detected, the tracker does not update its model, thus
 preventing the tracker from learning (and in the future, tracking) the book.
 The response graph shows that the model does not update with the appearance of
 the book because the noise introduced by the appearance of the book does not fade
-away like the previous example. 
+away like the previous example.
 
+![PSR Graph with Detection](resources/psr_occlusion_detection.jpg)
+
+Looking at the PSR graph, over time, its easy to determine to see when occlusions
+over the course of the video.
+
+### Difficulties
+There were two major difficulties I encountered when trying to detect occlusion.
+
+The first is that there isn't a simple way to determine a threshold value to use
+for detection - the cutoff value varies significantly depending on the sequence
+being used. In previous example sequence, 45 worked well as a cutoff, but the same
+value could not be used in a different sequence since the PSR values on the whole
+were significantly higher with 45 being too low to effectively detect occlusion.
+
+The second, even more complex issue is differentiating change in appearance from
+occlusion. The idea behind the learning property of the CMT is that the tracker
+adapts to changes in appearance of the desired object over time so it can still
+track the object even with changes in orientation or slight occlusion.
+Unfortunately, changes in appearance also result in low PSR values - values that
+are marked as occlusion when they're detected resulting in the tracker NOT learning
+on those frames.
+
+![Tracking the Surfer](resources/surferTracker.gif)
+In this example, occlusion detection was turned off to allow the tracker to train
+on all frames. This allowed the tracker to perform very well, following the surfer
+through his entire sequence of motions. Watching the video, it becomes clear that
+no occlusion occurs during the course of the sequence - while his face is not always
+visible, nothing ever blocks his head as a whole. However, when the PSR graph is
+examined, the values over time range wildly.
+
+![Surfer PSR Values](resources/surferPSR.jpg)
+
+These results show the complexity of detecting occlusion based solely on the PSR
+value of the frame: the change in pose results in drops in the PSR value similar
+to that of an occlusion. 
 
 ## Experiments
 
@@ -49,4 +84,3 @@ away like the previous example.
 ![Moving Book No Detection](resources/movingBook.gif)
 ![Moving Book with Detection](resources/movingBookOcclusionDetection.gif)
 ![Precision Graph with Detection](resources/precision_occlusion_detection.jpg)
-![PSR Graph with Detection](resources/psr_occlusion_detection.jpg)
