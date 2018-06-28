@@ -6,13 +6,13 @@ Summer 1 taken with Octavia Camps
 | Project                          | Description                            |
 |---------------------------------------------------------------------------|
 | [Project1][1]                    | Motion Detection                       |
-<!-- | [Project2][2]                    | Homographies/Panorama (Not Completed)  | -->
 | [Project3][3]                    | Optical Flow (Lucas Kanade)            |
 | [Project4][4]                    | Circulant Matrix Tracker and Occlusion Detection | 
-<!--| [Hw1][8]                         | Pinhole camera Model (Not Completed) |-->
 | [Hw2][6]                         | Filtering Images                       |
-<!--| [Hw4][7]                         | Homographies and Stero (Not Completed) |-->
 | [Hw5][8]                         | Motion and Object Recognition          |
+<!-- | [Project2][2]                    | Homographies/Panorama (Not Completed)  | -->
+<!--| [Hw1][8]                         | Pinhole camera Model (Not Completed) |-->
+<!--| [Hw4][7]                         | Homographies and Stero (Not Completed) |-->
 
 
 [1]: https://github.com/drewtu2/eece5639/tree/master/project1 
