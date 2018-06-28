@@ -5,7 +5,7 @@ In this project, we adapted the circulant matrix tracker (CMT) to detect occlusi
 during tracking. We further attempted to predict the motion of the object over
 time to assist in recovery from occlusion.
 
-# Occlusion Detection
+## Occlusion Detection
 The model of the CMT gradually changes over time to account for changes
 in the appearance of the tracked object. This makes it especially important to
 detect when occlusions occur to prevent the tracker from "learning" on the occluding
@@ -44,6 +44,12 @@ away like the previous example.
 Looking at the PSR graph, over time, its easy to determine to see when occlusions
 over the course of the video.
 
+![Precision Graph of CMT with Detection](resources/precision_occlusion_detection.jpg)
+Precision Graph of the CMT with Occlusion Detection
+
+<!--![Moving Book No Detection](resources/movingBook.gif)
+![Moving Book with Detection](resources/movingBookOcclusionDetection.gif) -->
+
 ### Difficulties
 There were two major difficulties I encountered when trying to detect occlusion.
 
@@ -73,14 +79,17 @@ examined, the values over time range wildly.
 
 These results show the complexity of detecting occlusion based solely on the PSR
 value of the frame: the change in pose results in drops in the PSR value similar
-to that of an occlusion. 
+to that of an occlusion.
 
-## Experiments
+## Motion Prediction
+For this project, I implemented a simple constant acceleration estimation of the
+tracked target. This model takes the last three measurements of the position
+and uses them to find the instantaneous velocity and acceleration.
+Using this information, its possible to estimate the position of the target `n`
+frames after an occlusion was detected. This estimation is helpful for searching
+and recovering a lost target after occlusion.
 
-## Conclusion
-
-
-
-![Moving Book No Detection](resources/movingBook.gif)
-![Moving Book with Detection](resources/movingBookOcclusionDetection.gif)
-![Precision Graph with Detection](resources/precision_occlusion_detection.jpg)
+While this will work for simple cases where constant acceleration IS the correct
+model to use, it will fail if the true model is more complex, for example, the
+a video of a bouncing ball being occluded behind a garbage can. In these more
+complex examples, the Henkel matrix can be used to capture the higher order movement.
