@@ -95,7 +95,7 @@ a video of a bouncing ball being occluded behind a garbage can. In these more
 complex examples, the Henkel matrix can be used to capture the higher order movement.
 
 # Running the tracker
-See the [readme.txt][tracker_release/readme.txt] in the tracker_release folder
+See the [readme.txt](tracker_release/readme.txt) in the tracker_release folder
 for instructions on running the tracker and proper data formats.
 
 Gif and Output file generation has been commented out.
