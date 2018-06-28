@@ -13,15 +13,17 @@ clc;
 %choose the path to the videos (you'll be able to choose one with the GUI)
 base_path = './data/';
 
-
 %parameters according to the paper
 padding = 1;					%extra area surrounding the target
 output_sigma_factor = 1/16;		%spatial bandwidth (proportional to target)
 sigma = 0.2;					%gaussian kernel bandwidth
 lambda = 1e-2;					%regularization
 interp_factor = 0.075;			%linear interpolation factor for adaptation
-psrThresh = 10;                 %occlusion detection threshold
-outfile = fopen('output.txt', 'wt');  %output file
+psrThresh = 45;                 %occlusion detection threshold
+
+% outfiles 
+outfile = fopen('output.txt', 'wt');  %output text file
+animation_out = './trackerAnimation.gif'; %output gif
 
 %notation: variables ending with f are in the frequency domain.
 
@@ -49,13 +51,14 @@ time = 0;  %to calculate FPS
 positions = zeros(numel(img_files), 2);  %to calculate precision
 psrs = zeros(numel(img_files), 1);  % Peak to Side Lobe Ratios (PSRs)
 psrs_delta = zeros(numel(img_files), 1);  % Peak to Side Lobe Ratios (PSRs)
+gif_frames = cell(numel(img_files), 1); % Create a cell array for gif frames
 
 for frame = 1:numel(img_files) % For every frame...
 	%load image
 	im = imread([video_path img_files{frame}]);
 	if size(im,3) > 1
 		im = rgb2gray(im);
-	end
+    end
 	if resize_image
 		im = imresize(im, 0.5);
     end
@@ -70,8 +73,7 @@ for frame = 1:numel(img_files) % For every frame...
 		%calculate response of the classifier at all locations
 		k = dense_gauss_kernel(sigma, x, z);
 		response = real(ifft2(alphaf .* fft2(k)));   %(Eq. 9)
-		figure(2);
-        mesh(response);
+		
         %target location is at the maximum response
 		[row, col] = find(response == max(response(:)), 1);
         
@@ -132,13 +134,15 @@ for frame = 1:numel(img_files) % For every frame...
         fprintf(outfile, '%d %d %d %d\n', rect_position);
     end
     
+    axis tight manual
 	if frame == 1  %first frame, create GUI
 		%figure('Number','off', 'Name',['Tracker - ' video_path])
-        figure('Name',['Tracker - ' video_path])
+        f = figure('Name',['Tracker - ' video_path]) % Video Stream + Reponse
+        subplot(1, 2, 1); % Video Stream
         
         % Add text overlay to the image
         im = insertText(im, position, text_str,'FontSize',12,'BoxColor',...
-    box_color,'BoxOpacity',0.4,'TextColor','white');
+            box_color,'BoxOpacity',0.4,'TextColor','white');
 
 		im_handle = imshow(im, 'Border','tight', 'InitialMag',200);
 		rect_handle = rectangle('Position',rect_position, 'EdgeColor','g');
@@ -147,14 +151,28 @@ for frame = 1:numel(img_files) % For every frame...
         measuredLine = animatedline(pos(1, 2), pos(1, 1), 1, 'Color', 'g', 'Linewidth', 3);
         estimatedLine = animatedline(estCol, estRow, 50, 'Color', 'r', 'Linewidth', 3);
         
+        % Plot Response
+        subplot(1, 2, 2);
+        responseMesh = handle(mesh(zeros(size(alphaf))));
+        title('Classifier Response')
+        xlabel('X pixel')
+        ylabel('Y pixel')
+        zlabel('Response Value')
+        gif_frames{frame} = imFromHandle(f);
 	else
 		try  %subsequent frames, update GUI
             im = insertText(im, position, text_str,'FontSize',12,'BoxColor',...
-    box_color,'BoxOpacity',0.4,'TextColor','white');
-			set(im_handle, 'CData', im)
-			set(rect_handle, 'Position', rect_position)
+                box_color,'BoxOpacity',0.4,'TextColor','white');
+			set(im_handle, 'CData', im);
+			set(rect_handle, 'Position', rect_position);
+            
+            % Add Points to the animated lines.
             addpoints(measuredLine, pos(1, 2), pos(1, 1), 1);
             addpoints(estimatedLine, estCol, estRow, 50);
+            
+            % Update the data values
+            set(responseMesh, 'ZData', response);
+            gif_frames{frame} = imFromHandle(f);
 		catch  %#ok, user has closed the window
 			return
 		end
@@ -163,6 +181,11 @@ for frame = 1:numel(img_files) % For every frame...
 	drawnow
 % 	pause(0.05)  %uncomment to run slower
 end
+
+% Dump to gif file
+dumpFigToGif(gif_frames(15:70), 'movingBookOcclusionDetection.gif');
+dumpFigToGif(gif_frames(70:150), 'absorbingBookOcclusionDetection.gif');
+
 
 if resize_image, positions = positions * 2; end
 

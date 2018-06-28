@@ -1,0 +1,886 @@
+60 3.550000e+01 58 73
+60 3.550000e+01 58 73
+60 3.550000e+01 58 73
+60 3.450000e+01 58 73
+60 3.450000e+01 58 73
+60 3.550000e+01 58 73
+59 3.550000e+01 58 73
+59 3.550000e+01 58 73
+59 3.650000e+01 58 73
+58 3.650000e+01 58 73
+57 3.650000e+01 58 73
+57 3.750000e+01 58 73
+56 3.750000e+01 58 73
+54 3.850000e+01 58 73
+53 3.850000e+01 58 73
+51 3.950000e+01 58 73
+50 3.950000e+01 58 73
+48 3.950000e+01 58 73
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+69 4.050000e+01 58 73
+69 4.050000e+01 58 73
+69 4.050000e+01 58 73
+69 4.050000e+01 58 73
+68 4.050000e+01 58 73
+68 4.050000e+01 58 73
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+55 3.950000e+01 58 73
+54 3.950000e+01 58 73
+54 3.950000e+01 58 73
+54 3.950000e+01 58 73
+54 3.950000e+01 58 73
+53 3.950000e+01 58 73
+53 3.950000e+01 58 73
+53 3.950000e+01 58 73
+53 3.850000e+01 58 73
+53 3.850000e+01 58 73
+53 3.850000e+01 58 73
+53 3.850000e+01 58 73
+53 3.850000e+01 58 73
+53 3.850000e+01 58 73
+52 3.850000e+01 58 73
+52 3.850000e+01 58 73
+52 3.850000e+01 58 73
+52 3.850000e+01 58 73
+52 3.850000e+01 58 73
+52 3.850000e+01 58 73
+53 3.850000e+01 58 73
+53 3.850000e+01 58 73
+53 3.850000e+01 58 73
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+53 2.750000e+01 58 73
+53 2.850000e+01 58 73
+53 2.850000e+01 58 73
+53 2.850000e+01 58 73
+53 2.950000e+01 58 73
+54 2.950000e+01 58 73
+54 2.950000e+01 58 73
+54 3.050000e+01 58 73
+55 3.050000e+01 58 73
+55 3.050000e+01 58 73
+55 3.150000e+01 58 73
+56 3.150000e+01 58 73
+56 3.150000e+01 58 73
+56 3.250000e+01 58 73
+56 3.250000e+01 58 73
+56 3.250000e+01 58 73
+57 3.350000e+01 58 73
+57 3.450000e+01 58 73
+57 3.450000e+01 58 73
+57 3.550000e+01 58 73
+57 3.550000e+01 58 73
+57 3.550000e+01 58 73
+56 3.650000e+01 58 73
+56 3.650000e+01 58 73
+56 3.750000e+01 58 73
+56 3.750000e+01 58 73
+56 3.850000e+01 58 73
+56 3.850000e+01 58 73
+56 3.850000e+01 58 73
+56 3.850000e+01 58 73
+56 3.850000e+01 58 73
+56 3.850000e+01 58 73
+56 3.850000e+01 58 73
+56 3.850000e+01 58 73
+56 3.850000e+01 58 73
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+50 4.050000e+01 58 73
+50 4.050000e+01 58 73
+50 4.050000e+01 58 73
+50 4.050000e+01 58 73
+50 3.950000e+01 58 73
+49 3.950000e+01 58 73
+49 3.950000e+01 58 73
+49 3.950000e+01 58 73
+48 3.950000e+01 58 73
+48 3.950000e+01 58 73
+47 3.950000e+01 58 73
+47 3.950000e+01 58 73
+47 3.950000e+01 58 73
+46 3.950000e+01 58 73
+46 3.950000e+01 58 73
+46 3.950000e+01 58 73
+45 3.950000e+01 58 73
+45 3.950000e+01 58 73
+44 3.950000e+01 58 73
+43 3.950000e+01 58 73
+42 4.050000e+01 58 73
+41 4.050000e+01 58 73
+40 4.050000e+01 58 73
+39 4.050000e+01 58 73
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+49 3.650000e+01 58 73
+49 3.650000e+01 58 73
+49 3.650000e+01 58 73
+48 3.650000e+01 58 73
+48 3.650000e+01 58 73
+48 3.650000e+01 58 73
+48 3.750000e+01 58 73
+48 3.750000e+01 58 73
+48 3.850000e+01 58 73
+48 3.850000e+01 58 73
+48 3.950000e+01 58 73
+48 4.050000e+01 58 73
+48 4.150000e+01 58 73
+48 4.250000e+01 58 73
+47 4.250000e+01 58 73
+47 4.250000e+01 58 73
+47 4.250000e+01 58 73
+47 4.250000e+01 58 73
+47 4.250000e+01 58 73
+47 4.250000e+01 58 73
+47 4.250000e+01 58 73
+47 4.250000e+01 58 73
+47 4.250000e+01 58 73
+47 4.250000e+01 58 73
+47 4.250000e+01 58 73
+47 4.250000e+01 58 73
+47 4.250000e+01 58 73
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+50 4.650000e+01 58 73
+50 4.650000e+01 58 73
+50 4.650000e+01 58 73
+50 4.650000e+01 58 73
+50 4.650000e+01 58 73
+51 4.650000e+01 58 73
+51 4.650000e+01 58 73
+51 4.650000e+01 58 73
+51 4.650000e+01 58 73
+51 4.650000e+01 58 73
+51 4.750000e+01 58 73
+51 4.750000e+01 58 73
+51 4.750000e+01 58 73
+52 4.750000e+01 58 73
+52 4.750000e+01 58 73
+52 4.750000e+01 58 73
+52 4.750000e+01 58 73
+52 4.750000e+01 58 73
+52 4.750000e+01 58 73
+52 4.750000e+01 58 73
+52 4.750000e+01 58 73
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+44 4.550000e+01 58 73
+43 4.550000e+01 58 73
+43 4.550000e+01 58 73
+42 4.550000e+01 58 73
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+47 3.550000e+01 58 73
+47 3.550000e+01 58 73
+47 3.550000e+01 58 73
+47 3.550000e+01 58 73
+47 3.550000e+01 58 73
+48 3.550000e+01 58 73
+48 3.550000e+01 58 73
+48 3.550000e+01 58 73
+48 3.550000e+01 58 73
+48 3.550000e+01 58 73
+48 3.550000e+01 58 73
+48 3.550000e+01 58 73
+49 3.650000e+01 58 73
+49 3.650000e+01 58 73
+50 3.650000e+01 58 73
+50 3.650000e+01 58 73
+51 3.650000e+01 58 73
+51 3.650000e+01 58 73
+52 3.650000e+01 58 73
+52 3.650000e+01 58 73
+52 3.650000e+01 58 73
+53 3.650000e+01 58 73
+53 3.650000e+01 58 73
+53 3.650000e+01 58 73
+54 3.650000e+01 58 73
+54 3.650000e+01 58 73
+54 3.750000e+01 58 73
+54 3.750000e+01 58 73
+55 3.750000e+01 58 73
+55 3.750000e+01 58 73
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+Occlusion Detected
+48 1.125000e+02 58 73
+102 1.265000e+02 58 73
