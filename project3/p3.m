@@ -6,8 +6,9 @@ function p3()
     clc;
     
     myFolder = '/Users/Andrew/Dropbox/Northeastern/2018Summer1/eece5639/project3/images/garden/'
-    myFolder = '/Users/Andrew/Dropbox/Northeastern/2018Summer1/eece5639/project3/images/walking/'
-    isRGB = true;
+    isRGB = false;
+%     myFolder = '/Users/Andrew/Dropbox/Northeastern/2018Summer1/eece5639/project3/images/walking/'
+%     isRGB = true;
 
     % Commented out for testing purposes.
     images = getImages(myFolder, isRGB);
@@ -102,14 +103,14 @@ function [Vx Vy] = opticalFlow(g1, g2)
 % 2. Compute the spatial intensity gradients Ix and Iy of image2. 
 % Recall that it is a good idea to smooth before taking the derivative, 
 % for example by using derivative of Gaussian operators.
-    %smoothG2 = imgaussfilt(g2, 2);
+    smoothG2 = imgaussfilt(g2, 2);
     smoothG2 = g2;
     Ix = abs(conv2(smoothG2, [-1 0 1], 'same'));
     Iy = abs(conv2(smoothG2, [-1 0 1]', 'same'));
 
 % 3. Compute the temporal gradient It by subtracting a smoothed version of 
 % image1 from a smoothed version of image2.
-    %smoothG1 = imgaussfilt(g1, 2);
+    smoothG1 = imgaussfilt(g1, 2);
     smoothG1 = g1;
     It = abs(smoothG2 - smoothG1);
 
