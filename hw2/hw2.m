@@ -53,7 +53,7 @@ function images = genImages(numImages)
     images = [];
     for i = 1:numImages
         image = double(128 * ones(256, 256));
-        noise = 2 .* randn(256); % Standard Deviation of 2
+        noise = 128 .* randn(256); % Standard Deviation of 2
         image = image + noise;
         images = cat(3, images, image);
     end
